@@ -1,0 +1,45 @@
+{
+  "quizzes": [
+    {
+      "id": 1,
+      "title": "Module 1 Test",
+      "description": "Core fundamentals assessment for Module 1.",
+      "passingPercent": 70,
+      "image": "https://picsum.photos/seed/module1/640/360"
+    }
+  ],
+  "questions": [
+    { "id": 1, "quizId": 1, "text": "What is 2 + 2?", "options": ["1", "2", "3", "4"] },
+    { "id": 2, "quizId": 1, "text": "Capital of France?", "options": ["Paris", "London", "Rome", "Berlin"] },
+    { "id": 3, "quizId": 1, "text": "Which is a prime number?", "options": ["9", "15", "17", "21"] },
+    { "id": 4, "quizId": 1, "text": "HTML stands for?", "options": ["Hyperlinks and Text Markup Language", "Home Tool Markup Language", "HyperText Markup Language", "Hyper Transfer Machine Language"] },
+    { "id": 5, "quizId": 1, "text": "CSS is used for?", "options": ["Structure", "Styling", "Databases", "Servers"] },
+    { "id": 6, "quizId": 1, "text": "2^5 equals?", "options": ["16", "32", "64", "128"] },
+    { "id": 7, "quizId": 1, "text": "Which is not a JavaScript framework?", "options": ["React", "Angular", "Laravel", "Vue"] },
+    { "id": 8, "quizId": 1, "text": "HTTP status for Not Found?", "options": ["200", "301", "404", "500"] },
+    { "id": 9, "quizId": 1, "text": "Array method to add at end?", "options": ["push", "pop", "shift", "slice"] },
+    { "id": 10, "quizId": 1, "text": "Color of the sky on a clear day?", "options": ["Red", "Blue", "Green", "Yellow"] },
+    { "id": 11, "quizId": 1, "text": "Which is a semantic HTML tag?", "options": ["div", "span", "article", "b"] },
+    { "id": 12, "quizId": 1, "text": "Which is a CSS layout mode?", "options": ["Flexbox", "jQuery", "Express", "MongoDB"] },
+    { "id": 13, "quizId": 1, "text": "JSON stands for?", "options": ["Java Servlet Object Notation", "JavaScript Object Notation", "Joint Style Open Notation", "Java Standard Object Name"] },
+    { "id": 14, "quizId": 1, "text": "Which is a NoSQL database?", "options": ["MySQL", "PostgreSQL", "MongoDB", "SQLite"] },
+    { "id": 15, "quizId": 1, "text": "Which tag links JS in HTML?", "options": ["<style>", "<link>", "<script>", "<meta>"] }
+  ],
+  "answers": [
+    { "quizId": 1, "questionId": 1, "correct": "4" },
+    { "quizId": 1, "questionId": 2, "correct": "Paris" },
+    { "quizId": 1, "questionId": 3, "correct": "17" },
+    { "quizId": 1, "questionId": 4, "correct": "HyperText Markup Language" },
+    { "quizId": 1, "questionId": 5, "correct": "Styling" },
+    { "quizId": 1, "questionId": 6, "correct": "32" },
+    { "quizId": 1, "questionId": 7, "correct": "Laravel" },
+    { "quizId": 1, "questionId": 8, "correct": "404" },
+    { "quizId": 1, "questionId": 9, "correct": "push" },
+    { "quizId": 1, "questionId": 10, "correct": "Blue" },
+    { "quizId": 1, "questionId": 11, "correct": "article" },
+    { "quizId": 1, "questionId": 12, "correct": "Flexbox" },
+    { "quizId": 1, "questionId": 13, "correct": "JavaScript Object Notation" },
+    { "quizId": 1, "questionId": 14, "correct": "MongoDB" },
+    { "quizId": 1, "questionId": 15, "correct": "<script>" }
+  ]
+}
