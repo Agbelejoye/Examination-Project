@@ -8,6 +8,10 @@
 
     <div v-if="loading" class="text-center my-5">Loading…</div>
 
+    <div v-if="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+
     <div v-else-if="!currentQuestion" class="text-center my-5">
       <p class="text-muted">Question not found.</p>
       <router-link :to="`/quiz/${quizId}/question/1`" class="btn btn-outline-secondary btn-sm">Go to Q1</router-link>
@@ -49,6 +53,7 @@ const loading = ref(true)
 const quizMeta = ref(null)
 const questions = ref([])
 const selected = ref(null)
+const error = ref('')
 
 const qId = computed(() => Number(route.params.qId))
 const currentQuestion = computed(() => questions.value.find(q => q.id === qId.value))
@@ -62,16 +67,32 @@ const prevLink = computed(() => {
 
 async function loadData() {
   loading.value = true
-  const [meta, qs] = await Promise.all([
-    fetchQuizWithQuestions(quizId),
-    fetchQuestionsForQuiz(quizId)
-  ])
-  quizMeta.value = meta
-  questions.value = (qs || []).sort((a, b) => a.id - b.id)
+  error.value = ''
+  try {
+    // Primary: fetch questions list for this quiz
+    const qs = await fetchQuestionsForQuiz(quizId)
+    questions.value = (qs || []).sort((a, b) => a.id - b.id)
 
-  const saved = readAnswersFromSession(quizId)
-  selected.value = saved[qId.value] ?? null
-  loading.value = false
+    // Optional: fetch quiz meta (passingPercent, title). If this fails, don't block questions.
+    try {
+      quizMeta.value = await fetchQuizWithQuestions(quizId)
+    } catch (e) {
+      // Non-blocking
+      console.warn('Quiz meta fetch failed:', e)
+    }
+
+    const saved = readAnswersFromSession(quizId)
+    selected.value = saved[qId.value] ?? null
+
+    if (!questions.value.length) {
+      error.value = 'No questions found. Ensure json-server is running and db.json has questions for this quiz.'
+    }
+  } catch (e) {
+    console.error(e)
+    error.value = 'Failed to load questions. Please check your connection and json-server.'
+  } finally {
+    loading.value = false
+  }
 }
 
 function select(opt) {
