@@ -15,7 +15,10 @@
       <div class="card-body">
         <h6 class="mb-3">Review</h6>
         <div v-for="q in questions" :key="q.id" class="mb-2">
-          <div class="fw-semibold mb-1">Q{{ q.id }}. {{ q.text }}</div>
+          <div class="fw-semibold mb-1 d-flex justify-content-between align-items-center">
+            <span>Q{{ q.id }}. {{ q.text }}</span>
+            <span v-if="isSkipped(q.id)" class="badge bg-warning text-dark">Skipped</span>
+          </div>
           <div class="list-group">
             <OptionRow
               v-for="(opt, i) in q.options"
@@ -40,19 +43,46 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchQuestionsForQuiz, fetchAnswersForQuiz, fetchQuizWithQuestions, readAnswersFromSession, clearAnswersFromSession } from '@/services/api'
+import { useAuthStore } from '@/stores/auth'
 import OptionRow from '@/components/OptionRow.vue'
 import ProgressRing from '@/components/ProgressRing.vue'
 
 const route = useRoute()
 const router = useRouter()
-const quizId = Number(route.params.quizId)
+const auth = useAuthStore()
+
+function toSafeInt(val, fallback = 1) {
+  const n = parseInt(val, 10)
+  return Number.isFinite(n) && n > 0 ? n : fallback
+}
+
+const quizId = computed(() => toSafeInt(route.params.quizId, 1))
 
 const questions = ref([])
 const answers = ref([])
 const quizMeta = ref(null)
 const review = ref(false)
 
-const selectedMap = computed(() => readAnswersFromSession(quizId))
+function readSelectedWithMigration(qid) {
+  // migrate any older keys like quiz_NaN_answers or quiz_undefined_answers
+  const current = readAnswersFromSession(qid)
+  const legacyNaN = sessionStorage.getItem('quiz_NaN_answers')
+  const legacyUndef = sessionStorage.getItem('quiz_undefined_answers')
+  let merged = { ...(current || {}) }
+  try { if (legacyNaN) merged = { ...JSON.parse(legacyNaN), ...merged } } catch {}
+  try { if (legacyUndef) merged = { ...JSON.parse(legacyUndef), ...merged } } catch {}
+  // write back to the proper key to ensure subsequent reads are consistent
+  sessionStorage.setItem(`quiz_${qid}_answers`, JSON.stringify(merged))
+  return merged
+}
+
+const selectedMap = computed(() => {
+  const raw = readSelectedWithMigration(quizId.value) || {}
+  // normalize keys to numbers for safer lookups
+  const norm = {}
+  Object.keys(raw).forEach(k => { norm[Number(k)] = raw[k] })
+  return norm
+})
 const answersMap = computed(() => {
   const m = {}
   answers.value.forEach(a => { m[a.questionId] = a.correct })
@@ -64,28 +94,63 @@ const pass = computed(() => (score.value.percent >= (quizMeta.value?.passingPerc
 
 function calculateScore(selectedMap, answers) {
   let correct = 0
-  answers.forEach(a => {
-    if (selectedMap[a.questionId] === a.correct) correct++
-  })
-  const total = answers.length || 1
-  return { correct, total, percent: Math.round((correct / total) * 100) }
+  const total = Array.isArray(answers) ? answers.length : 0
+  if (Array.isArray(answers)) {
+    answers.forEach(a => {
+      if (selectedMap[a.questionId] === a.correct) correct++
+    })
+  }
+  const percent = total > 0 ? Math.round((correct / total) * 100) : 0
+  return { correct, total, percent }
 }
 
 function toggleReview() { review.value = !review.value }
 
+const skippedSet = computed(() => {
+  try {
+    const raw = sessionStorage.getItem(`quiz_${quizId.value}_skips`)
+    const arr = raw ? JSON.parse(raw) : []
+    return new Set(arr)
+  } catch { return new Set() }
+})
+
+function isSkipped(qid) { return skippedSet.value.has(qid) }
+
 function reset() {
-  clearAnswersFromSession(quizId)
-  router.push({ name: 'QuizStart', params: { quizId } })
+  clearAnswersFromSession(quizId.value)
+  router.push({ name: 'QuizStart', params: { quizId: quizId.value } })
 }
 
 onMounted(async () => {
-  const [qs, ans, meta] = await Promise.all([
-    fetchQuestionsForQuiz(quizId),
-    fetchAnswersForQuiz(quizId),
-    fetchQuizWithQuestions(quizId)
+  let [qs, ans, meta] = await Promise.all([
+    fetchQuestionsForQuiz(quizId.value),
+    fetchAnswersForQuiz(quizId.value),
+    fetchQuizWithQuestions(quizId.value)
   ])
-  questions.value = qs.sort((a, b) => a.id - b.id)
-  answers.value = ans
-  quizMeta.value = meta
+  // Fallback retry if empty questions for any reason
+  if (!Array.isArray(qs) || qs.length === 0) {
+    try { qs = await fetchQuestionsForQuiz(quizId.value) } catch {}
+  }
+  questions.value = (qs || []).sort((a, b) => a.id - b.id)
+  answers.value = ans || []
+  quizMeta.value = meta || null
+
+  // Persist result history for Profile page
+  try {
+    const historyKey = auth.user ? `quiz_history_user_${auth.user.id}` : 'quiz_history_guest'
+    const raw = localStorage.getItem(historyKey)
+    const list = raw ? JSON.parse(raw) : []
+    const entry = {
+      quizId: quizId.value,
+      title: meta?.title || `Quiz ${quizId.value}`,
+      correct: score.value.correct,
+      total: score.value.total,
+      percent: score.value.percent,
+      passed: pass.value,
+      timestamp: Date.now()
+    }
+    list.push(entry)
+    localStorage.setItem(historyKey, JSON.stringify(list))
+  } catch {}
 })
 </script>

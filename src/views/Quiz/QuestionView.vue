@@ -3,7 +3,7 @@
     <QuestionButtons
       :questions="questions"
       :quizId="quizId"
-      :active="Number(route.params.qId)"
+      :active="qId"
     />
 
     <div v-if="loading" class="text-center my-5">Loading…</div>
@@ -14,11 +14,14 @@
 
     <div v-else-if="!currentQuestion" class="text-center my-5">
       <p class="text-muted">Question not found.</p>
-      <router-link :to="`/quiz/${quizId}/question/1`" class="btn btn-outline-secondary btn-sm">Go to Q1</router-link>
+      <router-link :to="{ name: 'QuestionView', params: { quizId: quizId, qId: 1 } }" class="btn btn-outline-secondary btn-sm">Go to Q1</router-link>
     </div>
 
     <div v-else>
-      <h5 class="mb-3">Q{{ currentQuestion.id }}. {{ currentQuestion.text }}</h5>
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Q{{ currentQuestion.id }}. {{ currentQuestion.text }}</h5>
+        <span class="badge" :class="timeLeft <= 10 ? 'bg-danger' : 'bg-secondary'">{{ timeLeft }}s</span>
+      </div>
 
       <div class="list-group mb-3">
         <OptionRow
@@ -30,9 +33,10 @@
         />
       </div>
 
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between gap-2">
         <router-link :to="prevLink" class="btn btn-outline-secondary" :class="{ disabled: !prevLink }">Prev</router-link>
-        <button @click="goNext" class="btn btn-primary">{{ isLast ? 'Finish' : 'Next' }}</button>
+        <button @click="submit" class="btn btn-success" :disabled="!selected">Submit</button>
+        <button @click="goNext" class="btn btn-primary" :disabled="!selected">{{ isLast ? 'Finish' : 'Next' }}</button>
       </div>
     </div>
   </div>
@@ -47,22 +51,30 @@ import OptionRow from '@/components/OptionRow.vue'
 
 const route = useRoute()
 const router = useRouter()
-const quizId = Number(route.params.quizId)
+
+function toSafeInt(val, fallback = 1) {
+  const n = parseInt(val, 10)
+  return Number.isFinite(n) && n > 0 ? n : fallback
+}
+
+const quizId = computed(() => toSafeInt(route.params.quizId, 1))
 
 const loading = ref(true)
 const quizMeta = ref(null)
 const questions = ref([])
 const selected = ref(null)
 const error = ref('')
+const timeLeft = ref(60)
+let timer = null
 
-const qId = computed(() => Number(route.params.qId))
+const qId = computed(() => toSafeInt(route.params.qId, 1))
 const currentQuestion = computed(() => questions.value.find(q => q.id === qId.value))
 const currentIndex = computed(() => questions.value.findIndex(q => q.id === qId.value))
 const isLast = computed(() => currentIndex.value === questions.value.length - 1)
 
 const prevLink = computed(() => {
   const prev = questions.value[currentIndex.value - 1]
-  return prev ? { name: 'QuestionView', params: { quizId, qId: prev.id } } : null
+  return prev ? { name: 'QuestionView', params: { quizId: quizId.value, qId: prev.id } } : null
 })
 
 async function loadData() {
@@ -70,18 +82,33 @@ async function loadData() {
   error.value = ''
   try {
     // Primary: fetch questions list for this quiz
-    const qs = await fetchQuestionsForQuiz(quizId)
-    questions.value = (qs || []).sort((a, b) => a.id - b.id)
+    const qs = await fetchQuestionsForQuiz(quizId.value)
+    // reshuffle order once per session
+    const orderKey = `quiz_${quizId.value}_order`
+    const existingOrder = sessionStorage.getItem(orderKey)
+    if (existingOrder) {
+      const order = JSON.parse(existingOrder)
+      const map = new Map(qs.map(q => [q.id, q]))
+      questions.value = order.map(id => map.get(id)).filter(Boolean)
+    } else {
+      const shuffled = [...qs].sort(() => Math.random() - 0.5)
+      questions.value = shuffled
+      sessionStorage.setItem(orderKey, JSON.stringify(shuffled.map(q => q.id)))
+    }
 
     // Optional: fetch quiz meta (passingPercent, title). If this fails, don't block questions.
     try {
-      quizMeta.value = await fetchQuizWithQuestions(quizId)
+      const [meta, qs] = await Promise.all([
+        fetchQuizWithQuestions(quizId.value),
+        fetchQuestionsForQuiz(quizId.value)
+      ])
+      quizMeta.value = meta
     } catch (e) {
       // Non-blocking
       console.warn('Quiz meta fetch failed:', e)
     }
 
-    const saved = readAnswersFromSession(quizId)
+    const saved = readAnswersFromSession(quizId.value)
     selected.value = saved[qId.value] ?? null
 
     if (!questions.value.length) {
@@ -97,22 +124,56 @@ async function loadData() {
 
 function select(opt) {
   selected.value = opt
-  saveAnswerToSession(quizId, qId.value, opt)
+  saveAnswerToSession(quizId.value, qId.value, opt)
 }
 
 function goNext() {
   if (isLast.value) {
-    router.push({ name: 'QuizResult', params: { quizId } })
+    router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
     return
   }
   const next = questions.value[currentIndex.value + 1]
-  router.push({ name: 'QuestionView', params: { quizId, qId: next.id } })
+  router.push({ name: 'QuestionView', params: { quizId: quizId.value, qId: next.id } })
+}
+
+function submit() {
+  // Ensure current selection is saved (select() already saves, but this is safe)
+  if (selected.value) {
+    saveAnswerToSession(quizId.value, qId.value, selected.value)
+  }
+  router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
 }
 
 onMounted(loadData)
 
 watch(() => route.params.qId, (newId) => {
-  const saved = readAnswersFromSession(quizId)
-  selected.value = saved[Number(newId)] ?? null
+  const saved = readAnswersFromSession(quizId.value)
+  selected.value = saved[toSafeInt(newId, 1)] ?? null
+  // reset timer on question change
+  startTimer()
 })
+
+function startTimer(){
+  if (timer) clearInterval(timer)
+  timeLeft.value = 60
+  timer = setInterval(() => {
+    timeLeft.value--
+    if (timeLeft.value <= 0){
+      clearInterval(timer)
+      // mark as skipped if not answered
+      try {
+        const key = `quiz_${quizId.value}_skips`
+        const raw = sessionStorage.getItem(key)
+        const list = raw ? JSON.parse(raw) : []
+        if (!selected.value && !list.includes(qId.value)) {
+          list.push(qId.value)
+          sessionStorage.setItem(key, JSON.stringify(list))
+        }
+      } catch {}
+      goNext()
+    }
+  }, 1000)
+}
+
+watch(loading, (v)=>{ if (!v) startTimer() })
 </script>

@@ -1,27 +1,65 @@
-const API_BASE = 'http://localhost:3000' // json-server
+import http from './http'
 
-export async function fetchQuizzes() {
-  const res = await fetch(`${API_BASE}/quizzes`)
-  if (!res.ok) throw new Error('Failed to fetch quizzes')
-  return res.json()
+export async function fetchQuizzes(params = {}) {
+  const { data } = await http.get('/quizzes', { params })
+  return data
 }
 
 export async function fetchQuizWithQuestions(quizId) {
-  const res = await fetch(`${API_BASE}/quizzes/${quizId}?_embed=questions`)
-  if (!res.ok) throw new Error('Failed to fetch quiz')
-  return res.json()
+  const { data } = await http.get(`/quizzes/${quizId}`, { params: { _embed: 'questions' } })
+  return data
 }
 
 export async function fetchQuestionsForQuiz(quizId) {
-  const res = await fetch(`${API_BASE}/questions?quizId=${quizId}`)
-  if (!res.ok) throw new Error('Failed to fetch questions')
-  return res.json()
+  const { data } = await http.get('/questions', { params: { quizId } })
+  return data
 }
 
 export async function fetchAnswersForQuiz(quizId) {
-  const res = await fetch(`${API_BASE}/answers?quizId=${quizId}`)
-  if (!res.ok) throw new Error('Failed to fetch answers')
-  return res.json()
+  const { data } = await http.get('/answers', { params: { quizId } })
+  return data
+}
+
+// Auth-related
+export async function fetchSchools() {
+  const { data } = await http.get('/schools')
+  return data
+}
+
+export async function fetchClasses(schoolId) {
+  const { data } = await http.get('/classes', { params: { schoolId } })
+  return data
+}
+
+export async function signUpUser(payload) {
+  // payload: { name, email, password, schoolId, classId }
+  const { data } = await http.post('/users', payload)
+  return data
+}
+
+export async function signInUser(email, password) {
+  const { data } = await http.get('/users', { params: { email, password } })
+  if (!Array.isArray(data) || data.length === 0) throw new Error('Invalid credentials')
+  return data[0]
+}
+
+// Admin bulk import
+export async function bulkImportQuestions(quizId, questions) {
+  // questions: array of { text, options[], id? } — we will assign incremental ids if missing
+  const existing = await fetchQuestionsForQuiz(quizId)
+  let nextId = existing.length ? Math.max(...existing.map(q => q.id)) + 1 : 1
+  const payloads = questions.map(q => ({
+    id: q.id ?? nextId++,
+    quizId,
+    text: q.text,
+    options: q.options
+  }))
+  const results = []
+  for (const p of payloads) {
+    const { data } = await http.post('/questions', p)
+    results.push(data)
+  }
+  return results
 }
 
 export function saveAnswerToSession(quizId, questionId, selected) {
