@@ -83,18 +83,10 @@ async function loadData() {
   try {
     // Primary: fetch questions list for this quiz
     const qs = await fetchQuestionsForQuiz(quizId.value)
-    // reshuffle order once per session
-    const orderKey = `quiz_${quizId.value}_order`
-    const existingOrder = sessionStorage.getItem(orderKey)
-    if (existingOrder) {
-      const order = JSON.parse(existingOrder)
-      const map = new Map(qs.map(q => [q.id, q]))
-      questions.value = order.map(id => map.get(id)).filter(Boolean)
-    } else {
-      const shuffled = [...qs].sort(() => Math.random() - 0.5)
-      questions.value = shuffled
-      sessionStorage.setItem(orderKey, JSON.stringify(shuffled.map(q => q.id)))
-    }
+    // Remove randomness: always sort ascending by numeric ID
+    questions.value = (qs || []).slice().sort((a, b) => a.id - b.id)
+    // Clean any legacy shuffle order
+    try { sessionStorage.removeItem(`quiz_${quizId.value}_order`) } catch {}
 
     // Optional: fetch quiz meta (passingPercent, title). If this fails, don't block questions.
     try {
@@ -129,7 +121,19 @@ function select(opt) {
 
 function goNext() {
   if (isLast.value) {
-    router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
+    // Use same confirmation as Submit on Finish
+    const go = () => router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
+    const Swal = window.Swal || window.swal
+    if (Swal) {
+      Swal.fire({
+        title: 'Finish Quiz?',
+        text: 'Are you sure you want to submit and view your results?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, finish',
+        cancelButtonText: 'Review again'
+      }).then(res => { if (res.isConfirmed) go() })
+    } else { go() }
     return
   }
   const next = questions.value[currentIndex.value + 1]
@@ -141,7 +145,21 @@ function submit() {
   if (selected.value) {
     saveAnswerToSession(quizId.value, qId.value, selected.value)
   }
-  router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
+  // Confirm with SweetAlert2 if available
+  const go = () => router.push({ name: 'QuizResult', params: { quizId: quizId.value } })
+  const Swal = window.Swal || window.swal
+  if (Swal) {
+    Swal.fire({
+      title: 'Submit Quiz?',
+      text: 'Are you sure you want to submit your answers?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit',
+      cancelButtonText: 'Review again'
+    }).then(res => { if (res.isConfirmed) go() })
+  } else {
+    go()
+  }
 }
 
 onMounted(loadData)

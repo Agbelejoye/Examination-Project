@@ -13,13 +13,15 @@
       <h4 class="mb-3">Welcome back</h4>
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input v-model="signin.email" class="form-control" type="email" placeholder="you@example.com"/>
+        <input v-model.trim="signin.email" class="form-control" type="email" placeholder="you@example.com"/>
+        <div v-if="signin.email && !isEmail(signin.email)" class="text-danger small mt-1">Enter a valid email.</div>
       </div>
       <div class="mb-3">
         <label class="form-label">Password</label>
         <input v-model="signin.password" class="form-control" type="password" placeholder="••••••••"/>
+        <div v-if="signin.password && signin.password.length < 5" class="text-danger small mt-1">Minimum 5 characters.</div>
       </div>
-      <button class="btn btn-primary w-100" :disabled="loading" @click="doSignIn">{{ loading ? 'Signing in…' : 'Sign In' }}</button>
+      <button class="btn btn-primary w-100" :disabled="loading || !signinValid" @click="doSignIn">{{ loading ? 'Signing in…' : 'Sign In' }}</button>
       <div class="text-center mt-3">
         <router-link to="/home">Continue as Guest</router-link>
       </div>
@@ -29,15 +31,18 @@
       <h4 class="mb-3">Create your account</h4>
       <div class="mb-2">
         <label class="form-label">Full name</label>
-        <input v-model="signup.name" class="form-control" type="text" placeholder="Your name"/>
+        <input v-model.trim="signup.name" class="form-control" type="text" placeholder="Your name"/>
+        <div v-if="signup.name && signup.name.length < 2" class="text-danger small mt-1">Enter your full name.</div>
       </div>
       <div class="mb-2">
         <label class="form-label">Email</label>
-        <input v-model="signup.email" class="form-control" type="email" placeholder="you@example.com"/>
+        <input v-model.trim="signup.email" class="form-control" type="email" placeholder="you@example.com"/>
+        <div v-if="signup.email && !isEmail(signup.email)" class="text-danger small mt-1">Enter a valid email.</div>
       </div>
       <div class="mb-2">
         <label class="form-label">Password</label>
         <input v-model="signup.password" class="form-control" type="password" placeholder="••••••••"/>
+        <div v-if="signup.password && signup.password.length < 5" class="text-danger small mt-1">Minimum 5 characters.</div>
       </div>
       <div class="mb-2">
         <label class="form-label">School</label>
@@ -52,6 +57,7 @@
           <option value="" disabled>Select class</option>
           <option v-for="c in classes" :key="c.id" :value="c.id">{{ c.name }}</option>
         </select>
+        <div v-if="classes.length && !signup.classId" class="text-danger small mt-1">Please select a class.</div>
       </div>
       <div class="mb-3">
         <label class="form-label">Role</label>
@@ -61,7 +67,7 @@
         </select>
         <div class="form-text">Default is student. Choose admin only for staff.</div>
       </div>
-      <button class="btn btn-primary w-100" :disabled="loading" @click="doSignUp">{{ loading ? 'Creating…' : 'Create Account' }}</button>
+      <button class="btn btn-primary w-100" :disabled="loading || !signupValid" @click="doSignUp">{{ loading ? 'Creating…' : 'Create Account' }}</button>
       <div class="text-center mt-3">
         <router-link to="/home">Skip for now</router-link>
       </div>
@@ -72,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { fetchSchools, fetchClasses } from '@/services/api'
@@ -90,6 +96,20 @@ const signup = ref({ name: '', email: '', password: '', schoolId: '', classId: '
 const schools = ref([])
 const classes = ref([])
 
+// Helpers and validators (moved into <script> so SFC compiles correctly)
+function isEmail(v){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+}
+
+const signinValid = computed(() => isEmail(signin.value.email) && (signin.value.password?.length >= 5))
+const signupValid = computed(() => {
+  const s = signup.value
+  const base = !!s.name && s.name.length >= 2 && isEmail(s.email) && (s.password?.length >= 5) && Number(s.schoolId) > 0
+  // Require class only if classes list is present for the chosen school
+  const classOk = classes.value.length === 0 ? true : Number(s.classId) > 0
+  return base && classOk
+})
+
 onMounted(async () => {
   try {
     schools.value = await fetchSchools()
@@ -100,7 +120,13 @@ onMounted(async () => {
 
 watch(() => signup.value.schoolId, async (id) => {
   if (!id) { classes.value = []; signup.value.classId = '' ; return }
-  try { classes.value = await fetchClasses(id) } catch {}
+  try {
+    classes.value = await fetchClasses(id)
+    // Auto-select first class to make UX smoother
+    if (Array.isArray(classes.value) && classes.value.length > 0) {
+      signup.value.classId = classes.value[0].id
+    }
+  } catch {}
 })
 
 async function doSignIn() {

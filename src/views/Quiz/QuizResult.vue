@@ -14,12 +14,15 @@
     <div v-if="review" class="card shadow-sm">
       <div class="card-body">
         <h6 class="mb-3">Review</h6>
-        <div v-for="q in questions" :key="q.id" class="mb-2">
+        <div v-for="q in questions" :key="q.id" class="mb-3">
           <div class="fw-semibold mb-1 d-flex justify-content-between align-items-center">
             <span>Q{{ q.id }}. {{ q.text }}</span>
-            <span v-if="isSkipped(q.id)" class="badge bg-warning text-dark">Skipped</span>
+            <div class="d-flex align-items-center gap-2">
+              <span v-if="isSkipped(q.id)" class="badge bg-warning text-dark">Skipped</span>
+              <span class="badge" :class="isCorrect(q.id) ? 'bg-success' : 'bg-danger'">{{ isCorrect(q.id) ? '100%' : '0%' }}</span>
+            </div>
           </div>
-          <div class="list-group">
+          <div class="list-group mb-2">
             <OptionRow
               v-for="(opt, i) in q.options"
               :key="i"
@@ -28,6 +31,13 @@
               :review="true"
               :correct="answersMap[q.id] === opt"
             />
+          </div>
+          <div class="small">
+            <div>
+              <span class="text-muted">Your answer:</span>
+              <span :class="isCorrect(q.id) ? 'text-success' : 'text-danger'">{{ selectedMap[q.id] ?? '—' }}</span>
+            </div>
+            <div class="text-success">Correct answer: {{ answersMap[q.id] ?? '—' }}</div>
           </div>
         </div>
       </div>
@@ -89,17 +99,18 @@ const answersMap = computed(() => {
   return m
 })
 
-const score = computed(() => calculateScore(selectedMap.value, answers.value))
+const score = computed(() => calculateScore(selectedMap.value, answersMap.value, questions.value))
 const pass = computed(() => (score.value.percent >= (quizMeta.value?.passingPercent || 70)))
 
-function calculateScore(selectedMap, answers) {
+function calculateScore(selectedMap, answersMap, questions) {
+  if (!Array.isArray(questions)) return { correct: 0, total: 0, percent: 0 }
   let correct = 0
-  const total = Array.isArray(answers) ? answers.length : 0
-  if (Array.isArray(answers)) {
-    answers.forEach(a => {
-      if (selectedMap[a.questionId] === a.correct) correct++
-    })
-  }
+  const total = questions.length
+  questions.forEach(q => {
+    const selected = selectedMap[q.id]
+    const correctAns = answersMap[q.id]
+    if (selected != null && correctAns != null && selected === correctAns) correct++
+  })
   const percent = total > 0 ? Math.round((correct / total) * 100) : 0
   return { correct, total, percent }
 }
@@ -115,6 +126,10 @@ const skippedSet = computed(() => {
 })
 
 function isSkipped(qid) { return skippedSet.value.has(qid) }
+
+function isCorrect(qid) {
+  return selectedMap.value[qid] != null && answersMap.value[qid] != null && selectedMap.value[qid] === answersMap.value[qid]
+}
 
 function reset() {
   clearAnswersFromSession(quizId.value)

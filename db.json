@@ -195,6 +195,28 @@
         "Berlin",
         "Madrid"
       ]
+    },
+    {
+      "id": 18,
+      "quizId": 1,
+      "text": "What is 5 + 2?",
+      "options": [
+        "1",
+        "2",
+        "7",
+        "4"
+      ]
+    },
+    {
+      "id": 19,
+      "quizId": 1,
+      "text": "Where is Lagos located?",
+      "options": [
+        "Paris",
+        "Rome",
+        "Berlin",
+        "Nigeria"
+      ]
     }
   ],
   "answers": [
@@ -352,6 +374,15 @@
       "password": "",
       "schoolId": 0,
       "classId": 0
+    },
+    {
+      "id": "7c1a",
+      "role": "admin",
+      "name": "aaa",
+      "email": "aaa@gmail.com",
+      "password": "111111",
+      "schoolId": 1,
+      "classId": 1
     }
   ]
 }

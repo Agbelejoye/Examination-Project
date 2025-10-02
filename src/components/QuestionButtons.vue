@@ -14,12 +14,13 @@
         style="width: 8px; height: 8px;"
       ></span>
     </router-link>
-    <router-link :to="`/quiz/${quizId}/result`" class="btn btn-success btn-sm">Result</router-link>
+    <button @click="confirmResult" class="btn btn-success btn-sm">Result</button>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
   questions: { type: Array, default: () => [] },
@@ -34,6 +35,22 @@ const answeredMap = computed(() => {
 
 function isAnswered(qid) {
   return answeredMap.value[qid] != null
+}
+
+const router = useRouter()
+function confirmResult(){
+  const go = () => router.push({ name: 'QuizResult', params: { quizId: props.quizId } })
+  const Swal = window.Swal || window.swal
+  if (Swal) {
+    Swal.fire({
+      title: 'Go to Results?',
+      text: 'Make sure you have answered the questions you want. Proceed to calculate your score?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, show results',
+      cancelButtonText: 'Stay on quiz'
+    }).then(res => { if (res.isConfirmed) go() })
+  } else { go() }
 }
 </script>
 
