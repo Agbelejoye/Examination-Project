@@ -103,16 +103,18 @@ const score = computed(() => calculateScore(selectedMap.value, answersMap.value,
 const pass = computed(() => (score.value.percent >= (quizMeta.value?.passingPercent || 70)))
 
 function calculateScore(selectedMap, answersMap, questions) {
-  if (!Array.isArray(questions)) return { correct: 0, total: 0, percent: 0 }
+  if (!Array.isArray(questions)) return { correct: 0, total: 0, percent: 0, marked: 0 }
   let correct = 0
-  const total = questions.length
-  questions.forEach(q => {
+  // Only mark questions that have an answer key to avoid 0/0 artifacts
+  const markedList = questions.filter(q => answersMap[q.id] != null)
+  const total = markedList.length
+  markedList.forEach(q => {
     const selected = selectedMap[q.id]
     const correctAns = answersMap[q.id]
     if (selected != null && correctAns != null && selected === correctAns) correct++
   })
   const percent = total > 0 ? Math.round((correct / total) * 100) : 0
-  return { correct, total, percent }
+  return { correct, total, percent, marked: total }
 }
 
 function toggleReview() { review.value = !review.value }
@@ -149,6 +151,9 @@ onMounted(async () => {
   questions.value = (qs || []).sort((a, b) => a.id - b.id)
   answers.value = ans || []
   quizMeta.value = meta || null
+
+  // Auto-open review so users immediately see detailed correctness
+  review.value = true
 
   // Persist result history for Profile page
   try {
