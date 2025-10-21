@@ -5,6 +5,43 @@ export async function fetchQuizzes(params = {}) {
   return data
 }
 
+// Admin: Questions CRUD
+export async function createQuestion(question) {
+  // question: { quizId, text, options[], id? }
+  const { data } = await http.post('/questions', question)
+  return data
+}
+
+export async function updateQuestion(id, patch) {
+  const { data } = await http.patch(`/questions/${id}`, patch)
+  return data
+}
+
+export async function deleteQuestion(id) {
+  await http.delete(`/questions/${id}`)
+}
+
+// Admin: Answers helpers
+export async function upsertAnswer(quizId, questionId, correct) {
+  // Try find existing answer
+  const { data: existing } = await http.get('/answers', { params: { quizId, questionId } })
+  if (Array.isArray(existing) && existing.length) {
+    const id = existing[0].id
+    const { data } = await http.patch(`/answers/${id}`, { correct })
+    return data
+  } else {
+    const { data } = await http.post('/answers', { quizId, questionId, correct })
+    return data
+  }
+}
+
+export async function deleteAnswerByQuestion(quizId, questionId) {
+  const { data: existing } = await http.get('/answers', { params: { quizId, questionId } })
+  for (const a of existing || []) {
+    await http.delete(`/answers/${a.id}`)
+  }
+}
+
 export async function fetchQuizWithQuestions(quizId) {
   const { data } = await http.get(`/quizzes/${quizId}`, { params: { _embed: 'questions' } })
   return data

@@ -23,7 +23,7 @@
       </div>
       <button class="btn btn-primary w-100" :disabled="loading || !signinValid" @click="doSignIn">{{ loading ? 'Signing in…' : 'Sign In' }}</button>
       <div class="text-center mt-3">
-        <router-link to="/home">Continue as Guest</router-link>
+        <button class="btn btn-link" @click="doGuest">Continue as Guest</button>
       </div>
     </div>
 
@@ -69,7 +69,7 @@
       </div>
       <button class="btn btn-primary w-100" :disabled="loading || !signupValid" @click="doSignUp">{{ loading ? 'Creating…' : 'Create Account' }}</button>
       <div class="text-center mt-3">
-        <router-link to="/home">Skip for now</router-link>
+        <button class="btn btn-link" @click="doGuest">Skip for now</button>
       </div>
     </div>
 
@@ -136,7 +136,11 @@ async function doSignIn() {
     await auth.signIn(signin.value.email, signin.value.password)
     router.push('/home')
   } catch (e) {
-    error.value = e?.message || 'Sign in failed'
+    if (e?.code === 'ERR_NETWORK') {
+      error.value = `Cannot reach API at ${import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:3000'}. Please start json-server.`
+    } else {
+      error.value = e?.message || 'Sign in failed'
+    }
   } finally { loading.value = false }
 }
 
@@ -151,7 +155,16 @@ async function doSignUp() {
     await auth.signUp(payload)
     router.push('/home')
   } catch (e) {
-    error.value = e?.message || 'Sign up failed'
+    if (e?.code === 'ERR_NETWORK') {
+      error.value = `Cannot reach API at ${import.meta?.env?.VITE_API_BASE_URL || 'http://localhost:3000'}. Please start json-server.`
+    } else {
+      error.value = e?.message || 'Sign up failed'
+    }
   } finally { loading.value = false }
+}
+
+function doGuest() {
+  try { auth.continueAsGuest() } catch {}
+  router.push('/home')
 }
 </script>

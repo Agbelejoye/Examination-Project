@@ -83,8 +83,14 @@ async function loadData() {
   try {
     // Primary: fetch questions list for this quiz
     const qs = await fetchQuestionsForQuiz(quizId.value)
+    // Normalize IDs to numbers in case db.json stores them as strings
+    const normalized = (qs || []).map(q => ({
+      ...q,
+      id: Number(q.id),
+      quizId: Number(q.quizId)
+    }))
     // Remove randomness: always sort ascending by numeric ID
-    questions.value = (qs || []).slice().sort((a, b) => a.id - b.id)
+    questions.value = normalized.slice().sort((a, b) => a.id - b.id)
     // Clean any legacy shuffle order
     try { sessionStorage.removeItem(`quiz_${quizId.value}_order`) } catch {}
 

@@ -38,5 +38,19 @@ export const useAuthStore = defineStore('auth', () => {
     persist()
   }
 
-  return { user, isAuthenticated, signIn, signUp, signOut }
+  // Guest session allows navigating quizzes without a backend user
+  function continueAsGuest() {
+    user.value = {
+      id: 'guest',
+      role: 'guest',
+      name: 'Guest',
+      email: '',
+      schoolId: 0,
+      classId: 0
+    }
+    persist()
+    return user.value
+  }
+
+  return { user, isAuthenticated, signIn, signUp, signOut, continueAsGuest }
 })

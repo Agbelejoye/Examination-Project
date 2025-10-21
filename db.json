@@ -1,7 +1,7 @@
 {
   "quizzes": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Module 1 Test",
       "description": "Core fundamentals assessment for Module 1.",
       "passingPercent": 70,
@@ -10,7 +10,7 @@
   ],
   "questions": [
     {
-      "id": 1,
+      "id": "1",
       "quizId": 1,
       "text": "What is 2 + 2?",
       "options": [
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "quizId": 1,
       "text": "Capital of France?",
       "options": [
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "quizId": 1,
       "text": "Which is a prime number?",
       "options": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "quizId": 1,
       "text": "HTML stands for?",
       "options": [
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "quizId": 1,
       "text": "CSS is used for?",
       "options": [
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "quizId": 1,
       "text": "2^5 equals?",
       "options": [
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": "7",
       "quizId": 1,
       "text": "Which is not a JavaScript framework?",
       "options": [
@@ -87,7 +87,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": "8",
       "quizId": 1,
       "text": "HTTP status for Not Found?",
       "options": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": "9",
       "quizId": 1,
       "text": "Array method to add at end?",
       "options": [
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": "10",
       "quizId": 1,
       "text": "Color of the sky on a clear day?",
       "options": [
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": "11",
       "quizId": 1,
       "text": "Which is a semantic HTML tag?",
       "options": [
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": "12",
       "quizId": 1,
       "text": "Which is a CSS layout mode?",
       "options": [
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": "13",
       "quizId": 1,
       "text": "JSON stands for?",
       "options": [
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": "14",
       "quizId": 1,
       "text": "Which is a NoSQL database?",
       "options": [
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "id": 15,
+      "id": "15",
       "quizId": 1,
       "text": "Which tag links JS in HTML?",
       "options": [
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": "16",
       "quizId": 1,
       "text": "What is 2 + 4?",
       "options": [
@@ -186,7 +186,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": "17",
       "quizId": 1,
       "text": "Capital of Nigeria?",
       "options": [
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": "18",
       "quizId": 1,
       "text": "What is 5 + 2?",
       "options": [
@@ -208,7 +208,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": "19",
       "quizId": 1,
       "text": "Where is Lagos located?",
       "options": [
@@ -223,124 +223,163 @@
     {
       "quizId": 1,
       "questionId": 1,
-      "correct": "4"
+      "correct": "4",
+      "id": "8da5"
     },
     {
       "quizId": 1,
       "questionId": 2,
-      "correct": "Paris"
+      "correct": "Paris",
+      "id": "1753"
     },
     {
       "quizId": 1,
       "questionId": 3,
-      "correct": "17"
+      "correct": "17",
+      "id": "03bb"
     },
     {
       "quizId": 1,
       "questionId": 4,
-      "correct": "HyperText Markup Language"
+      "correct": "HyperText Markup Language",
+      "id": "c2ef"
     },
     {
       "quizId": 1,
       "questionId": 5,
-      "correct": "Styling"
+      "correct": "Styling",
+      "id": "3977"
     },
     {
       "quizId": 1,
       "questionId": 6,
-      "correct": "32"
+      "correct": "32",
+      "id": "7a93"
     },
     {
       "quizId": 1,
       "questionId": 7,
-      "correct": "Laravel"
+      "correct": "Laravel",
+      "id": "d3e7"
     },
     {
       "quizId": 1,
       "questionId": 8,
-      "correct": "404"
+      "correct": "404",
+      "id": "3873"
     },
     {
       "quizId": 1,
       "questionId": 9,
-      "correct": "push"
+      "correct": "push",
+      "id": "ca1c"
     },
     {
       "quizId": 1,
       "questionId": 10,
-      "correct": "Blue"
+      "correct": "Blue",
+      "id": "a1cd"
     },
     {
       "quizId": 1,
       "questionId": 11,
-      "correct": "article"
+      "correct": "article",
+      "id": "1bc0"
     },
     {
       "quizId": 1,
       "questionId": 12,
-      "correct": "Flexbox"
+      "correct": "Flexbox",
+      "id": "1347"
     },
     {
       "quizId": 1,
       "questionId": 13,
-      "correct": "JavaScript Object Notation"
+      "correct": "JavaScript Object Notation",
+      "id": "560b"
     },
     {
       "quizId": 1,
       "questionId": 14,
-      "correct": "MongoDB"
+      "correct": "MongoDB",
+      "id": "a865"
     },
     {
       "quizId": 1,
       "questionId": 15,
-      "correct": "<script>"
+      "correct": "<script>",
+      "id": "e615"
+    },
+    {
+      "id": "2131",
+      "quizId": 1,
+      "questionId": 16,
+      "correct": "6"
+    },
+    {
+      "id": "1e40",
+      "quizId": 1,
+      "questionId": 17,
+      "correct": "Abuja"
+    },
+    {
+      "id": "3320",
+      "quizId": 1,
+      "questionId": 18,
+      "correct": "7"
+    },
+    {
+      "id": "dfbc",
+      "quizId": 1,
+      "questionId": 19,
+      "correct": "Nigeria"
     }
   ],
   "schools": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Sunrise High School"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Greenfield College"
     }
   ],
   "classes": [
     {
-      "id": 1,
+      "id": "1",
       "schoolId": 1,
       "name": "JSS 1"
     },
     {
-      "id": 2,
+      "id": "2",
       "schoolId": 1,
       "name": "JSS 2"
     },
     {
-      "id": 3,
+      "id": "3",
       "schoolId": 1,
       "name": "JSS 3"
     },
     {
-      "id": 4,
+      "id": "4",
       "schoolId": 2,
       "name": "SS 1"
     },
     {
-      "id": 5,
+      "id": "5",
       "schoolId": 2,
       "name": "SS 2"
     },
     {
-      "id": 6,
+      "id": "6",
       "schoolId": 2,
       "name": "SS 3"
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Demo Learner",
       "email": "learner@example.com",
       "password": "password",
@@ -358,7 +397,7 @@
       "role": "student"
     },
     {
-      "id": 999,
+      "id": "999",
       "name": "Admin User",
       "email": "admin@example.com",
       "password": "admin",
@@ -381,6 +420,15 @@
       "name": "aaa",
       "email": "aaa@gmail.com",
       "password": "111111",
+      "schoolId": 1,
+      "classId": 1
+    },
+    {
+      "id": "c8f0",
+      "role": "admin",
+      "name": "aaa",
+      "email": "aia@gmail.com",
+      "password": "000000",
       "schoolId": 1,
       "classId": 1
     }
