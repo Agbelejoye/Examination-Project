@@ -1,13 +1,20 @@
 <template>
-  <div class="container py-4" style="max-width: 460px;">
-    <ul class="nav nav-pills mb-3">
-      <li class="nav-item">
-        <button class="nav-link" :class="{ active: mode==='signin' }" @click="mode='signin'">Sign In</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" :class="{ active: mode==='signup' }" @click="mode='signup'">Sign Up</button>
-      </li>
-    </ul>
+  <div class="auth-container">
+    <div class="container py-5" style="max-width: 500px;">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-gradient-primary text-white text-center py-4">
+          <h2 class="mb-0 fw-bold">Welcome to Quizzo</h2>
+          <p class="mb-0 opacity-75">Your learning journey starts here</p>
+        </div>
+        <div class="card-body p-4">
+          <ul class="nav nav-pills nav-justified mb-4" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link fw-semibold" :class="{ active: mode==='signin' }" @click="mode='signin'" role="tab">Sign In</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link fw-semibold" :class="{ active: mode==='signup' }" @click="mode='signup'" role="tab">Sign Up</button>
+            </li>
+          </ul>
 
     <div v-if="mode==='signin'">
       <h4 class="mb-3">Welcome back</h4>
@@ -73,7 +80,10 @@
       </div>
     </div>
 
-    <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
+          <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -168,3 +178,68 @@ function doGuest() {
   router.push('/home')
 }
 </script>
+
+<style scoped>
+.auth-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+}
+
+.nav-pills .nav-link {
+  border-radius: 8px;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.active {
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+  color: #6610f2;
+}
+
+.alert {
+  border-radius: 8px;
+  border: none;
+}
+</style>
