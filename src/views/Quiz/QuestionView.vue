@@ -187,11 +187,11 @@ function startTimer(){
       // mark as skipped if not answered
       try {
         const key = `quiz_${quizId.value}_skips`
-        const raw = sessionStorage.getItem(key)
+        const raw = localStorage.getItem(key)
         const list = raw ? JSON.parse(raw) : []
         if (!selected.value && !list.includes(qId.value)) {
           list.push(qId.value)
-          sessionStorage.setItem(key, JSON.stringify(list))
+          localStorage.setItem(key, JSON.stringify(list))
         }
       } catch {}
       goNext()

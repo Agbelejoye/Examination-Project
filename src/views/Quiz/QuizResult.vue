@@ -1,9 +1,9 @@
 <template>
   <div class="container py-4" style="max-width: 520px;">
     <div class="d-flex flex-column align-items-center mb-4">
-      <ProgressRing :percent="score.percent" :label="'Your Score'" />
+      <ProgressRing :percent="score.percent" :label="'Score on Answered Questions'" />
       <h4 class="mt-3">{{ pass ? 'Passed ✅' : 'Try Again ❌' }}</h4>
-      <p class="text-muted">Correct: {{ score.correct }}/{{ score.total }}</p>
+      <p class="text-muted">Correct Answers: {{ score.correct }}/{{ score.total }} Answered</p>
     </div>
 
     <div class="d-grid gap-2 mb-4">
@@ -86,13 +86,7 @@ function readSelectedWithMigration(qid) {
   return merged
 }
 
-const selectedMap = computed(() => {
-  const raw = readSelectedWithMigration(quizId.value) || {}
-  // normalize keys to numbers for safer lookups
-  const norm = {}
-  Object.keys(raw).forEach(k => { norm[Number(k)] = raw[k] })
-  return norm
-})
+const selectedMap = ref({})
 const answersMap = computed(() => {
   const m = {}
   answers.value.forEach(a => { m[a.questionId] = a.correct })
@@ -105,10 +99,10 @@ const pass = computed(() => (score.value.percent >= (quizMeta.value?.passingPerc
 function calculateScore(selectedMap, answersMap, questions) {
   if (!Array.isArray(questions)) return { correct: 0, total: 0, percent: 0, marked: 0 }
   let correct = 0
-  // Only mark questions that have an answer key to avoid 0/0 artifacts
-  const markedList = questions.filter(q => answersMap[q.id] != null)
-  const total = markedList.length
-  markedList.forEach(q => {
+  // Only count questions that the user answered
+  const answeredList = questions.filter(q => selectedMap[q.id] != null)
+  const total = answeredList.length
+  answeredList.forEach(q => {
     const selected = selectedMap[q.id]
     const correctAns = answersMap[q.id]
     if (selected != null && correctAns != null && selected === correctAns) correct++
@@ -121,7 +115,7 @@ function toggleReview() { review.value = !review.value }
 
 const skippedSet = computed(() => {
   try {
-    const raw = sessionStorage.getItem(`quiz_${quizId.value}_skips`)
+    const raw = localStorage.getItem(`quiz_${quizId.value}_skips`)
     const arr = raw ? JSON.parse(raw) : []
     return new Set(arr)
   } catch { return new Set() }
@@ -151,6 +145,12 @@ onMounted(async () => {
   questions.value = (qs || []).sort((a, b) => a.id - b.id)
   answers.value = ans || []
   quizMeta.value = meta || null
+
+  // Update selectedMap
+  const raw = readSelectedWithMigration(quizId.value) || {}
+  const norm = {}
+  Object.keys(raw).forEach(k => { norm[Number(k)] = raw[k] })
+  selectedMap.value = norm
 
   // Auto-open review so users immediately see detailed correctness
   review.value = true

@@ -252,6 +252,831 @@
         "Berlin",
         "Nigeria"
       ]
+    },
+    {
+      "id": 20,
+      "quizId": 2,
+      "text": "What is 5 + 7?",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": 21,
+      "quizId": 2,
+      "text": "What is 9 - 4?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": 22,
+      "quizId": 2,
+      "text": "What is 6 × 3?",
+      "options": [
+        "15",
+        "16",
+        "17",
+        "18"
+      ]
+    },
+    {
+      "id": 23,
+      "quizId": 2,
+      "text": "What is 24 ÷ 6?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": 24,
+      "quizId": 2,
+      "text": "What is the square of 5?",
+      "options": [
+        "20",
+        "25",
+        "30",
+        "35"
+      ]
+    },
+    {
+      "id": 25,
+      "quizId": 2,
+      "text": "What is 15% of 200?",
+      "options": [
+        "20",
+        "25",
+        "30",
+        "35"
+      ]
+    },
+    {
+      "id": 26,
+      "quizId": 2,
+      "text": "Solve for x: 2x + 3 = 7",
+      "options": [
+        "x = 1",
+        "x = 2",
+        "x = 3",
+        "x = 4"
+      ]
+    },
+    {
+      "id": 27,
+      "quizId": 2,
+      "text": "What is the area of a square with side 4?",
+      "options": [
+        "12",
+        "14",
+        "16",
+        "18"
+      ]
+    },
+    {
+      "id": 28,
+      "quizId": 2,
+      "text": "What is 100 ÷ 5?",
+      "options": [
+        "15",
+        "18",
+        "20",
+        "25"
+      ]
+    },
+    {
+      "id": 29,
+      "quizId": 3,
+      "text": "What is the chemical symbol for water?",
+      "options": [
+        "H2",
+        "O2",
+        "H2O",
+        "CO2"
+      ]
+    },
+    {
+      "id": 30,
+      "quizId": 3,
+      "text": "Which planet is known as the Red Planet?",
+      "options": [
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn"
+      ]
+    },
+    {
+      "id": 31,
+      "quizId": 3,
+      "text": "What is the boiling point of water at sea level?",
+      "options": [
+        "90°C",
+        "95°C",
+        "100°C",
+        "105°C"
+      ]
+    },
+    {
+      "id": 32,
+      "quizId": 3,
+      "text": "Which gas do plants absorb from the atmosphere?",
+      "options": [
+        "Oxygen",
+        "Carbon Dioxide",
+        "Nitrogen",
+        "Hydrogen"
+      ]
+    },
+    {
+      "id": 33,
+      "quizId": 3,
+      "text": "What is the center of an atom called?",
+      "options": [
+        "Electron",
+        "Proton",
+        "Neutron",
+        "Nucleus"
+      ]
+    },
+    {
+      "id": 34,
+      "quizId": 3,
+      "text": "Which force keeps us on the ground?",
+      "options": [
+        "Magnetic",
+        "Gravitational",
+        "Electric",
+        "Nuclear"
+      ]
+    },
+    {
+      "id": 35,
+      "quizId": 3,
+      "text": "What is the speed of light approximately?",
+      "options": [
+        "300,000 km/s",
+        "300,000 m/s",
+        "300,000 mph",
+        "300,000 ft/s"
+      ]
+    },
+    {
+      "id": 36,
+      "quizId": 3,
+      "text": "Which element has atomic number 1?",
+      "options": [
+        "Helium",
+        "Hydrogen",
+        "Lithium",
+        "Carbon"
+      ]
+    },
+    {
+      "id": 37,
+      "quizId": 3,
+      "text": "What is photosynthesis?",
+      "options": [
+        "Plant breathing",
+        "Plant growth",
+        "Plant making food",
+        "Plant sleeping"
+      ]
+    },
+    {
+      "id": 38,
+      "quizId": 3,
+      "text": "Which is the largest planet?",
+      "options": [
+        "Earth",
+        "Mars",
+        "Jupiter",
+        "Saturn"
+      ]
+    },
+    {
+      "id": 39,
+      "quizId": 2,
+      "text": "What is 28 ÷ 4?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "id": 40,
+      "quizId": 2,
+      "text": "What is the square root of 81?",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ]
+    },
+    {
+      "id": 41,
+      "quizId": 2,
+      "text": "What is 3 × 7?",
+      "options": [
+        "19",
+        "20",
+        "21",
+        "22"
+      ]
+    },
+    {
+      "id": 42,
+      "quizId": 2,
+      "text": "What is 50 - 15?",
+      "options": [
+        "30",
+        "35",
+        "40",
+        "45"
+      ]
+    },
+    {
+      "id": 43,
+      "quizId": 2,
+      "text": "What is 2^4?",
+      "options": [
+        "8",
+        "12",
+        "16",
+        "20"
+      ]
+    },
+    {
+      "id": 44,
+      "quizId": 2,
+      "text": "What is 100 ÷ 25?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": 45,
+      "quizId": 3,
+      "text": "What is the chemical symbol for gold?",
+      "options": [
+        "Go",
+        "Gd",
+        "Au",
+        "Ag"
+      ]
+    },
+    {
+      "id": 46,
+      "quizId": 3,
+      "text": "Which planet is closest to the Sun?",
+      "options": [
+        "Venus",
+        "Earth",
+        "Mercury",
+        "Mars"
+      ]
+    },
+    {
+      "id": 47,
+      "quizId": 3,
+      "text": "What is the unit of electric current?",
+      "options": [
+        "Volt",
+        "Ampere",
+        "Watt",
+        "Ohm"
+      ]
+    },
+    {
+      "id": 48,
+      "quizId": 3,
+      "text": "What type of blood cells fight infections?",
+      "options": [
+        "Red blood cells",
+        "White blood cells",
+        "Platelets",
+        "Plasma"
+      ]
+    },
+    {
+      "id": 49,
+      "quizId": 3,
+      "text": "What is the process by which plants make food?",
+      "options": [
+        "Respiration",
+        "Transpiration",
+        "Photosynthesis",
+        "Evaporation"
+      ]
+    },
+    {
+      "id": 50,
+      "quizId": 4,
+      "text": "Who was the first President of the United States?",
+      "options": [
+        "George Washington",
+        "Thomas Jefferson",
+        "Abraham Lincoln",
+        "John Adams"
+      ]
+    },
+    {
+      "id": 51,
+      "quizId": 4,
+      "text": "In which year did World War II end?",
+      "options": [
+        "1945",
+        "1939",
+        "1941",
+        "1950"
+      ]
+    },
+    {
+      "id": 52,
+      "quizId": 4,
+      "text": "Which ancient civilization built the pyramids at Giza?",
+      "options": [
+        "Romans",
+        "Greeks",
+        "Egyptians",
+        "Mayans"
+      ]
+    },
+    {
+      "id": 53,
+      "quizId": 4,
+      "text": "Who was the British monarch during the American Revolution?",
+      "options": [
+        "Queen Elizabeth I",
+        "King George III",
+        "Queen Victoria",
+        "King Henry VIII"
+      ]
+    },
+    {
+      "id": 54,
+      "quizId": 4,
+      "text": "What was the name of the ship that carried the Pilgrims to America in 1620?",
+      "options": [
+        "Santa Maria",
+        "Mayflower",
+        "Nina",
+        "Pinta"
+      ]
+    },
+    {
+      "id": 55,
+      "quizId": 4,
+      "text": "Which war was fought between the North and South regions in the United States from 1861 to 1865?",
+      "options": [
+        "Revolutionary War",
+        "Civil War",
+        "World War I",
+        "Mexican-American War"
+      ]
+    },
+    {
+      "id": 56,
+      "quizId": 4,
+      "text": "Who was the first man to walk on the moon?",
+      "options": [
+        "Yuri Gagarin",
+        "Neil Armstrong",
+        "Buzz Aldrin",
+        "John Glenn"
+      ]
+    },
+    {
+      "id": 57,
+      "quizId": 4,
+      "text": "Which empire was ruled by Julius Caesar?",
+      "options": [
+        "Greek",
+        "Roman",
+        "Persian",
+        "Ottoman"
+      ]
+    },
+    {
+      "id": 58,
+      "quizId": 4,
+      "text": "What was the main cause of the French Revolution?",
+      "options": [
+        "Economic inequality",
+        "Religious conflict",
+        "Foreign invasion",
+        "Technological advancement"
+      ]
+    },
+    {
+      "id": 59,
+      "quizId": 4,
+      "text": "Which country was the first to grant women the right to vote?",
+      "options": [
+        "United States",
+        "United Kingdom",
+        "New Zealand",
+        "France"
+      ]
+    },
+    {
+      "id": 60,
+      "quizId": 4,
+      "text": "Who painted the Mona Lisa?",
+      "options": [
+        "Vincent van Gogh",
+        "Pablo Picasso",
+        "Leonardo da Vinci",
+        "Michelangelo"
+      ]
+    },
+    {
+      "id": 61,
+      "quizId": 4,
+      "text": "Which event marked the start of World War I?",
+      "options": [
+        "Assassination of Archduke Franz Ferdinand",
+        "Bombing of Pearl Harbor",
+        "Fall of Berlin Wall",
+        "Cuban Missile Crisis"
+      ]
+    },
+    {
+      "id": 62,
+      "quizId": 4,
+      "text": "What was the name of the first successful powered flight by the Wright brothers?",
+      "options": [
+        "Kitty Hawk",
+        "Spirit of St. Louis",
+        "Voyager",
+        "Concorde"
+      ]
+    },
+    {
+      "id": 63,
+      "quizId": 4,
+      "text": "Which African country was the last to gain independence from European colonial rule?",
+      "options": [
+        "South Africa",
+        "Namibia",
+        "Zimbabwe",
+        "Eritrea"
+      ]
+    },
+    {
+      "id": 64,
+      "quizId": 4,
+      "text": "Who was the leader of the Soviet Union during World War II?",
+      "options": [
+        "Vladimir Lenin",
+        "Joseph Stalin",
+        "Nikita Khrushchev",
+        "Mikhail Gorbachev"
+      ]
+    },
+    {
+      "id": 65,
+      "quizId": 5,
+      "text": "Who wrote \"Pride and Prejudice\"?",
+      "options": [
+        "Jane Austen",
+        "Charlotte Bronte",
+        "Emily Bronte",
+        "George Orwell"
+      ]
+    },
+    {
+      "id": 66,
+      "quizId": 5,
+      "text": "What is the name of the hobbit in \"The Lord of the Rings\"?",
+      "options": [
+        "Frodo",
+        "Bilbo",
+        "Gandalf",
+        "Aragorn"
+      ]
+    },
+    {
+      "id": 67,
+      "quizId": 5,
+      "text": "Which Shakespeare play features the character Hamlet?",
+      "options": [
+        "Romeo and Juliet",
+        "Macbeth",
+        "Hamlet",
+        "Othello"
+      ]
+    },
+    {
+      "id": 68,
+      "quizId": 5,
+      "text": "Who is the author of \"1984\"?",
+      "options": [
+        "Aldous Huxley",
+        "George Orwell",
+        "Ray Bradbury",
+        "Margaret Atwood"
+      ]
+    },
+    {
+      "id": 69,
+      "quizId": 5,
+      "text": "What is the first book in the Harry Potter series?",
+      "options": [
+        "Harry Potter and the Chamber of Secrets",
+        "Harry Potter and the Philosopher's Stone",
+        "Harry Potter and the Goblet of Fire",
+        "Harry Potter and the Prisoner of Azkaban"
+      ]
+    },
+    {
+      "id": 70,
+      "quizId": 5,
+      "text": "Which novel is by F. Scott Fitzgerald?",
+      "options": [
+        "The Great Gatsby",
+        "To Kill a Mockingbird",
+        "The Catcher in the Rye",
+        "Lord of the Flies"
+      ]
+    },
+    {
+      "id": 71,
+      "quizId": 5,
+      "text": "Who wrote \"The Great Gatsby\"?",
+      "options": [
+        "F. Scott Fitzgerald",
+        "Ernest Hemingway",
+        "John Steinbeck",
+        "William Faulkner"
+      ]
+    },
+    {
+      "id": 72,
+      "quizId": 5,
+      "text": "What is the title of the first book in the \"A Song of Ice and Fire\" series?",
+      "options": [
+        "A Feast for Crows",
+        "A Game of Thrones",
+        "A Clash of Kings",
+        "A Storm of Swords"
+      ]
+    },
+    {
+      "id": 73,
+      "quizId": 5,
+      "text": "Which author wrote \"To Kill a Mockingbird\"?",
+      "options": [
+        "Harper Lee",
+        "J.D. Salinger",
+        "Mark Twain",
+        "Louisa May Alcott"
+      ]
+    },
+    {
+      "id": 74,
+      "quizId": 5,
+      "text": "What is the name of the lion in \"The Chronicles of Narnia\"?",
+      "options": [
+        "Aslan",
+        "Simba",
+        "Mufasa",
+        "Scar"
+      ]
+    },
+    {
+      "id": 75,
+      "quizId": 5,
+      "text": "Who is the author of \"The Catcher in the Rye\"?",
+      "options": [
+        "J.D. Salinger",
+        "Jack Kerouac",
+        "Allen Ginsberg",
+        "Sylvia Plath"
+      ]
+    },
+    {
+      "id": 76,
+      "quizId": 5,
+      "text": "Which book is by George R.R. Martin?",
+      "options": [
+        "A Game of Thrones",
+        "The Hobbit",
+        "The Silmarillion",
+        "The Lord of the Rings"
+      ]
+    },
+    {
+      "id": 77,
+      "quizId": 5,
+      "text": "What is the title of the first book in the \"His Dark Materials\" trilogy?",
+      "options": [
+        "The Subtle Knife",
+        "The Amber Spyglass",
+        "The Golden Compass",
+        "Lyra's Oxford"
+      ]
+    },
+    {
+      "id": 78,
+      "quizId": 5,
+      "text": "Who wrote \"The Hobbit\"?",
+      "options": [
+        "J.R.R. Tolkien",
+        "C.S. Lewis",
+        "J.K. Rowling",
+        "Philip Pullman"
+      ]
+    },
+    {
+      "id": 79,
+      "quizId": 5,
+      "text": "Which novel features the character Jay Gatsby?",
+      "options": [
+        "The Great Gatsby",
+        "The Sun Also Rises",
+        "A Farewell to Arms",
+        "For Whom the Bell Tolls"
+      ]
+    },
+    {
+      "id": 80,
+      "quizId": 6,
+      "text": "What does CPU stand for?",
+      "options": [
+        "Central Processing Unit",
+        "Computer Personal Unit",
+        "Central Program Unit",
+        "Computer Processing Unit"
+      ]
+    },
+    {
+      "id": 81,
+      "quizId": 6,
+      "text": "Which programming language is known for its use in web development?",
+      "options": [
+        "Python",
+        "JavaScript",
+        "C++",
+        "Java"
+      ]
+    },
+    {
+      "id": 82,
+      "quizId": 6,
+      "text": "What is the binary representation of the decimal number 10?",
+      "options": [
+        "1010",
+        "1001",
+        "1100",
+        "1111"
+      ]
+    },
+    {
+      "id": 83,
+      "quizId": 6,
+      "text": "Which data structure follows the Last In First Out (LIFO) principle?",
+      "options": [
+        "Queue",
+        "Stack",
+        "Array",
+        "Linked List"
+      ]
+    },
+    {
+      "id": 84,
+      "quizId": 6,
+      "text": "What does HTML stand for?",
+      "options": [
+        "HyperText Markup Language",
+        "High Tech Modern Language",
+        "Home Tool Markup Language",
+        "Hyper Transfer Markup Language"
+      ]
+    },
+    {
+      "id": 85,
+      "quizId": 6,
+      "text": "Which algorithm is used for sorting an array by repeatedly finding the minimum element?",
+      "options": [
+        "Bubble Sort",
+        "Selection Sort",
+        "Insertion Sort",
+        "Merge Sort"
+      ]
+    },
+    {
+      "id": 86,
+      "quizId": 6,
+      "text": "What is the time complexity of binary search?",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n^2)"
+      ]
+    },
+    {
+      "id": 87,
+      "quizId": 6,
+      "text": "Which of the following is not a programming paradigm?",
+      "options": [
+        "Object-Oriented",
+        "Functional",
+        "Procedural",
+        "Algorithmic"
+      ]
+    },
+    {
+      "id": 88,
+      "quizId": 6,
+      "text": "What does SQL stand for?",
+      "options": [
+        "Structured Query Language",
+        "Simple Query Language",
+        "Standard Query Language",
+        "System Query Language"
+      ]
+    },
+    {
+      "id": 89,
+      "quizId": 6,
+      "text": "Which data type is used to store true or false values?",
+      "options": [
+        "Integer",
+        "String",
+        "Boolean",
+        "Float"
+      ]
+    },
+    {
+      "id": 90,
+      "quizId": 6,
+      "text": "What is the purpose of a compiler?",
+      "options": [
+        "To execute code",
+        "To translate code to machine language",
+        "To debug code",
+        "To design code"
+      ]
+    },
+    {
+      "id": 91,
+      "quizId": 6,
+      "text": "Which of the following is a version control system?",
+      "options": [
+        "Git",
+        "Docker",
+        "Kubernetes",
+        "Jenkins"
+      ]
+    },
+    {
+      "id": 92,
+      "quizId": 6,
+      "text": "What does API stand for?",
+      "options": [
+        "Application Programming Interface",
+        "Advanced Programming Interface",
+        "Automated Programming Interface",
+        "Application Process Interface"
+      ]
+    },
+    {
+      "id": 93,
+      "quizId": 6,
+      "text": "Which sorting algorithm has the worst case time complexity of O(n^2)?",
+      "options": [
+        "Quick Sort",
+        "Merge Sort",
+        "Bubble Sort",
+        "Heap Sort"
+      ]
+    },
+    {
+      "id": 94,
+      "quizId": 6,
+      "text": "What is the main function of an operating system?",
+      "options": [
+        "To run applications",
+        "To manage hardware resources",
+        "To store data",
+        "To connect to the internet"
+      ]
     }
   ],
   "answers": [
@@ -349,6 +1174,381 @@
       "quizId": 1,
       "questionId": 19,
       "correct": "Nigeria"
+    },
+    {
+      "quizId": 2,
+      "questionId": 20,
+      "correct": "12"
+    },
+    {
+      "quizId": 2,
+      "questionId": 21,
+      "correct": "5"
+    },
+    {
+      "quizId": 2,
+      "questionId": 22,
+      "correct": "18"
+    },
+    {
+      "quizId": 2,
+      "questionId": 23,
+      "correct": "4"
+    },
+    {
+      "quizId": 2,
+      "questionId": 24,
+      "correct": "25"
+    },
+    {
+      "quizId": 2,
+      "questionId": 25,
+      "correct": "30"
+    },
+    {
+      "quizId": 2,
+      "questionId": 26,
+      "correct": "x = 2"
+    },
+    {
+      "quizId": 2,
+      "questionId": 27,
+      "correct": "16"
+    },
+    {
+      "quizId": 2,
+      "questionId": 28,
+      "correct": "20"
+    },
+    {
+      "quizId": 3,
+      "questionId": 29,
+      "correct": "H2O"
+    },
+    {
+      "quizId": 3,
+      "questionId": 30,
+      "correct": "Mars"
+    },
+    {
+      "quizId": 3,
+      "questionId": 31,
+      "correct": "100°C"
+    },
+    {
+      "quizId": 3,
+      "questionId": 32,
+      "correct": "Carbon Dioxide"
+    },
+    {
+      "quizId": 3,
+      "questionId": 33,
+      "correct": "Nucleus"
+    },
+    {
+      "quizId": 3,
+      "questionId": 34,
+      "correct": "Gravitational"
+    },
+    {
+      "quizId": 3,
+      "questionId": 35,
+      "correct": "300,000 km/s"
+    },
+    {
+      "quizId": 3,
+      "questionId": 36,
+      "correct": "Hydrogen"
+    },
+    {
+      "quizId": 3,
+      "questionId": 37,
+      "correct": "Plant making food"
+    },
+    {
+      "quizId": 3,
+      "questionId": 38,
+      "correct": "Jupiter"
+    },
+    {
+      "quizId": 2,
+      "questionId": 39,
+      "correct": "7"
+    },
+    {
+      "quizId": 2,
+      "questionId": 40,
+      "correct": "9"
+    },
+    {
+      "quizId": 2,
+      "questionId": 41,
+      "correct": "21"
+    },
+    {
+      "quizId": 2,
+      "questionId": 42,
+      "correct": "35"
+    },
+    {
+      "quizId": 2,
+      "questionId": 43,
+      "correct": "16"
+    },
+    {
+      "quizId": 2,
+      "questionId": 44,
+      "correct": "4"
+    },
+    {
+      "quizId": 3,
+      "questionId": 45,
+      "correct": "Au"
+    },
+    {
+      "quizId": 3,
+      "questionId": 46,
+      "correct": "Mercury"
+    },
+    {
+      "quizId": 3,
+      "questionId": 47,
+      "correct": "Ampere"
+    },
+    {
+      "quizId": 3,
+      "questionId": 48,
+      "correct": "White blood cells"
+    },
+    {
+      "quizId": 3,
+      "questionId": 49,
+      "correct": "Photosynthesis"
+    },
+    {
+      "quizId": 4,
+      "questionId": 50,
+      "correct": "George Washington"
+    },
+    {
+      "quizId": 4,
+      "questionId": 51,
+      "correct": "1945"
+    },
+    {
+      "quizId": 4,
+      "questionId": 52,
+      "correct": "Egyptians"
+    },
+    {
+      "quizId": 4,
+      "questionId": 53,
+      "correct": "King George III"
+    },
+    {
+      "quizId": 4,
+      "questionId": 54,
+      "correct": "Mayflower"
+    },
+    {
+      "quizId": 4,
+      "questionId": 55,
+      "correct": "Civil War"
+    },
+    {
+      "quizId": 4,
+      "questionId": 56,
+      "correct": "Neil Armstrong"
+    },
+    {
+      "quizId": 4,
+      "questionId": 57,
+      "correct": "Roman"
+    },
+    {
+      "quizId": 4,
+      "questionId": 58,
+      "correct": "Economic inequality"
+    },
+    {
+      "quizId": 4,
+      "questionId": 59,
+      "correct": "New Zealand"
+    },
+    {
+      "quizId": 4,
+      "questionId": 60,
+      "correct": "Leonardo da Vinci"
+    },
+    {
+      "quizId": 4,
+      "questionId": 61,
+      "correct": "Assassination of Archduke Franz Ferdinand"
+    },
+    {
+      "quizId": 4,
+      "questionId": 62,
+      "correct": "Kitty Hawk"
+    },
+    {
+      "quizId": 4,
+      "questionId": 63,
+      "correct": "Namibia"
+    },
+    {
+      "quizId": 4,
+      "questionId": 64,
+      "correct": "Joseph Stalin"
+    },
+    {
+      "quizId": 5,
+      "questionId": 65,
+      "correct": "Jane Austen"
+    },
+    {
+      "quizId": 5,
+      "questionId": 66,
+      "correct": "Frodo"
+    },
+    {
+      "quizId": 5,
+      "questionId": 67,
+      "correct": "Hamlet"
+    },
+    {
+      "quizId": 5,
+      "questionId": 68,
+      "correct": "George Orwell"
+    },
+    {
+      "quizId": 5,
+      "questionId": 69,
+      "correct": "Harry Potter and the Philosopher's Stone"
+    },
+    {
+      "quizId": 5,
+      "questionId": 70,
+      "correct": "The Great Gatsby"
+    },
+    {
+      "quizId": 5,
+      "questionId": 71,
+      "correct": "F. Scott Fitzgerald"
+    },
+    {
+      "quizId": 5,
+      "questionId": 72,
+      "correct": "A Game of Thrones"
+    },
+    {
+      "quizId": 5,
+      "questionId": 73,
+      "correct": "Harper Lee"
+    },
+    {
+      "quizId": 5,
+      "questionId": 74,
+      "correct": "Aslan"
+    },
+    {
+      "quizId": 5,
+      "questionId": 75,
+      "correct": "J.D. Salinger"
+    },
+    {
+      "quizId": 5,
+      "questionId": 76,
+      "correct": "A Game of Thrones"
+    },
+    {
+      "quizId": 5,
+      "questionId": 77,
+      "correct": "The Golden Compass"
+    },
+    {
+      "quizId": 5,
+      "questionId": 78,
+      "correct": "J.R.R. Tolkien"
+    },
+    {
+      "quizId": 5,
+      "questionId": 79,
+      "correct": "The Great Gatsby"
+    },
+    {
+      "quizId": 6,
+      "questionId": 80,
+      "correct": "Central Processing Unit"
+    },
+    {
+      "quizId": 6,
+      "questionId": 81,
+      "correct": "JavaScript"
+    },
+    {
+      "quizId": 6,
+      "questionId": 82,
+      "correct": "1010"
+    },
+    {
+      "quizId": 6,
+      "questionId": 83,
+      "correct": "Stack"
+    },
+    {
+      "quizId": 6,
+      "questionId": 84,
+      "correct": "HyperText Markup Language"
+    },
+    {
+      "quizId": 6,
+      "questionId": 85,
+      "correct": "Selection Sort"
+    },
+    {
+      "quizId": 6,
+      "questionId": 86,
+      "correct": "O(log n)"
+    },
+    {
+      "quizId": 6,
+      "questionId": 87,
+      "correct": "Algorithmic"
+    },
+    {
+      "quizId": 6,
+      "questionId": 88,
+      "correct": "Structured Query Language"
+    },
+    {
+      "quizId": 6,
+      "questionId": 89,
+      "correct": "Boolean"
+    },
+    {
+      "quizId": 6,
+      "questionId": 90,
+      "correct": "To translate code to machine language"
+    },
+    {
+      "quizId": 6,
+      "questionId": 91,
+      "correct": "Git"
+    },
+    {
+      "quizId": 6,
+      "questionId": 92,
+      "correct": "Application Programming Interface"
+    },
+    {
+      "quizId": 6,
+      "questionId": 93,
+      "correct": "Bubble Sort"
+    },
+    {
+      "quizId": 6,
+      "questionId": 94,
+      "correct": "To manage hardware resources"
     }
   ],
   "schools": [
@@ -435,7 +1635,7 @@
       "role": "admin",
       "name": "aaa",
       "email": "aaa@gmail.com",
-      "password": "c",
+      "password": "caaaaaa",
       "schoolId": 1,
       "classId": 1
     },
@@ -444,6 +1644,24 @@
       "role": "student",
       "name": "Ahmed",
       "email": "aaa@gmail.com",
+      "password": "123456",
+      "schoolId": 1,
+      "classId": 1
+    },
+    {
+      "id": "6ed8",
+      "role": "admin",
+      "name": "aaa",
+      "email": "aaa@gmail.com",
+      "password": "123456",
+      "schoolId": 1,
+      "classId": 1
+    },
+    {
+      "id": "13e6",
+      "role": "student",
+      "name": "aaa1",
+      "email": "aaa1@gmail.com",
       "password": "123456",
       "schoolId": 1,
       "classId": 1

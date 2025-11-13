@@ -101,18 +101,18 @@ export async function bulkImportQuestions(quizId, questions) {
 
 export function saveAnswerToSession(quizId, questionId, selected) {
   const key = `quiz_${quizId}_answers`
-  const raw = sessionStorage.getItem(key)
+  const raw = localStorage.getItem(key)
   const map = raw ? JSON.parse(raw) : {}
   map[questionId] = selected
-  sessionStorage.setItem(key, JSON.stringify(map))
+  localStorage.setItem(key, JSON.stringify(map))
 }
 
 export function readAnswersFromSession(quizId) {
   const key = `quiz_${quizId}_answers`
-  const raw = sessionStorage.getItem(key)
+  const raw = localStorage.getItem(key)
   return raw ? JSON.parse(raw) : {}
 }
 
 export function clearAnswersFromSession(quizId) {
-  sessionStorage.removeItem(`quiz_${quizId}_answers`)
+  localStorage.removeItem(`quiz_${quizId}_answers`)
 }

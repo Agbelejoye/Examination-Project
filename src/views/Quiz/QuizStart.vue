@@ -13,7 +13,7 @@
           <div class="stat-label">Passing Score</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">~15</div>
+          <div class="stat-number">~{{ Math.ceil(questionsCount * 0.8) }}</div>
           <div class="stat-label">Minutes</div>
         </div>
       </div>
@@ -33,7 +33,7 @@
               </li>
               <li class="mb-3">
                 <i class="bi bi-arrows-move text-primary me-2"></i>
-                <strong>Navigate freely:</strong> Use the question buttons (Q1-Q15) to jump between questions.
+                <strong>Navigate freely:</strong> Use the question buttons (Q1-Q{{ questionsCount }}) to jump between questions.
               </li>
               <li class="mb-3">
                 <i class="bi bi-graph-up text-info me-2"></i>
